@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Admin from '../Components/Admin';
-import orgs from '../Components/Orgs';
 import ErrorPage from '../Components/ErrorPage';
 import Loading from '../Components/Loading';
 

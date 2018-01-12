@@ -8,7 +8,6 @@ import Avatar from 'material-ui/Avatar';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import ErrorPage from '../Components/ErrorPage';
-import Observable from '../Observable';
 import '../CSS/Admin.css';
 
 
