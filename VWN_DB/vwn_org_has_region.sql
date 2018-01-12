@@ -27,7 +27,7 @@ CREATE TABLE `org_has_region` (
   `region_id` int(11) NOT NULL,
   PRIMARY KEY (`org_id`,`region_id`),
   KEY `fk_org_has_region_region1_idx` (`region_id`),
-  KEY `fk_org_has_region_org1_idx` (`region_id`),
+  KEY `fk_org_has_region_org1_idx` (`org_id`),
   CONSTRAINT `fk_org_has_region_org1` FOREIGN KEY (`org_id`) REFERENCES `org` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_org_has_region_region1` FOREIGN KEY (`region_id`) REFERENCES `region` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

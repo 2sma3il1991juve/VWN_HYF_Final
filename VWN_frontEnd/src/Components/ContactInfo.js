@@ -41,16 +41,17 @@ class ContactsInfo extends Component {
           onRequestClose={this.handleClose}
           paperClassName="popUp"
         >
-          { Object.keys(this.props.orgContacts).map(e => {
+          {Object.keys(this.props.orgContacts).map(e => {
             if (e !== 'id' && e !== 'latitude' && e !== 'longitude') {
+              console.log(e.toString())
               return (<div key={e}>
                 <p>
                   <span className="contactTitle">{e.toString()}: </span>
-                  <span className="contactInfo"> {this.props.orgContacts[e]}</span>
+                  {e.toString() === 'web' ? <a href={this.props.orgContacts[e]}>{this.props.orgContacts[e]}</a> : <span className="contactInfo"> {this.props.orgContacts[e]}</span>}
                 </p>
               </div>)
             }
-          return undefined
+            return undefined
           })
           }
         </Dialog>
