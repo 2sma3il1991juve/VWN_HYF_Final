@@ -117,7 +117,7 @@ class Orgs extends Component {
                 </CardMedia >
                 <CardTitle className="TheExpandables4" title={orgs[org]["name"]} subtitle={orgs[org]["contacts"][0]["web"]} expandable={true} />
                 <CardText className="TheExpandables4" expandable={true}>
-                  {orgs[org]["description_company"]}
+                  {orgs[org]["description"]}
                 </CardText>
               </Card>
             </div>
