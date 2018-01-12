@@ -32,13 +32,13 @@ export default class RegionSearch extends Component {
         Observable.setHash("r", activeRegions)
     }
 
-    handleOpen = () => {
-        this.setState({ open: true });
-    };
+    // handleOpen = () => {
+    //     this.setState({ open: true });
+    // };
 
-    handleClose = () => {
-        this.setState({ open: false });
-    };
+    // handleClose = () => {
+    //     this.setState({ open: false });
+    // };
 
     render() {
         const actions = [
@@ -51,8 +51,8 @@ export default class RegionSearch extends Component {
             />,
         ];
         return (
-            <div>
-                <FlatButton label="Map" onClick={this.handleOpen} />
+            <div className="map">
+                {/* <FlatButton label="Map" onClick={this.handleOpen} />
                 <div>
                     <Dialog
                         paperClassName="popUp"
@@ -62,10 +62,10 @@ export default class RegionSearch extends Component {
                         modal={false}
                         open={this.state.open}
                         onRequestClose={this.handleClose}
-                    >
+                    > */}
                         <Map activeRegions={this.state.activeRegions} handle={this.handleRegionChange} />
-                    </Dialog>
-                </div>
+                    {/* </Dialog>
+                </div> */}
             </div>
         )
     }
