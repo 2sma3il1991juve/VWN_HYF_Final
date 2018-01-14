@@ -4,7 +4,8 @@ import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import Route from 'react-router-dom/Route';
 import '../CSS/LandingPage.css';
-import ImageGallery from 'react-image-gallery';
+
+
 
 // const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -15,6 +16,7 @@ class LandingPage extends Component {
       data: {},
     }
   }
+
 
   componentWillMount() {
     this.setState({
@@ -44,13 +46,14 @@ class LandingPage extends Component {
                         <div className="itemOverlay"></div>
                         <div className="captionContainer">
                           <h3>{data[org]['name']}</h3>
+
                         </div>
                   </div>
                 )
               }
               )
               }
-              <ImageGallery items={imagesArray} />
+
             </div>
           );
         }} />
