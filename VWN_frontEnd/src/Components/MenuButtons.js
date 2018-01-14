@@ -47,33 +47,33 @@ class MenuButtons extends Component {
           if (route === '/') {
             return (
               <div >
-                <RaisedButton backgroundColor='#e9e8e3' primary={false} style={style1} label="View Organizations" labelStyle={style1.labelStyle} onClick={() => props.history.push('/organizations')} />
-                <RaisedButton backgroundColor='#e9e8e3' primary={false} style={style2} label="Add your organization" labelStyle={style1.labelStyle} onClick={() => props.history.push('/add')} />
-                <RaisedButton backgroundColor='#e9e8e3' primary={false} style={style3} label="Login as an admin" labelStyle={style1.labelStyle}onClick={() => props.history.push('/login')} />
+                <RaisedButton backgroundColor='#e9e8e3' primary={false} style={style1} label="Organizations" labelStyle={style1.labelStyle} onClick={() => props.history.push('/organizations')} />
+                <RaisedButton backgroundColor='#e9e8e3' primary={false} style={style2} label="Add ORG" labelStyle={style1.labelStyle} onClick={() => props.history.push('/add')} />
+                <RaisedButton backgroundColor='#e9e8e3' primary={false} style={style3} label="Login" labelStyle={style1.labelStyle}onClick={() => props.history.push('/login')} />
               </div>
             );
           } else if (route === '/login') {
             return (
               <div>
-                <RaisedButton backgroundColor='#e9e8e3' primary={false} style={style1} label="View Organizations" labelStyle={style1.labelStyle} onClick={() => props.history.push('/organizations')} />
-                <RaisedButton backgroundColor='#e9e8e3' primary={false} style={style2} label="Add your organization" labelStyle={style1.labelStyle} onClick={() => props.history.push('/add')} />
-                <RaisedButton backgroundColor='#e9e8e3' primary={false} style={style3} label="Back to Home Page" labelStyle={style1.labelStyle} onClick={() => props.history.push('/')} />
+                <RaisedButton backgroundColor='#e9e8e3' primary={false} style={style1} label="Organizations" labelStyle={style1.labelStyle} onClick={() => props.history.push('/organizations')} />
+                <RaisedButton backgroundColor='#e9e8e3' primary={false} style={style2} label="Add ORG" labelStyle={style1.labelStyle} onClick={() => props.history.push('/add')} />
+                <RaisedButton backgroundColor='#e9e8e3' primary={false} style={style3} label="Home" labelStyle={style1.labelStyle} onClick={() => props.history.push('/')} />
               </div>
             );
           } else if (route === '/add') {
             return (
               <div >
-                <RaisedButton backgroundColor='#e9e8e3' primary={false} style={style1} label="Login as an admin" labelStyle={style1.labelStyle} onClick={() => props.history.push('/login')} />
-                <RaisedButton backgroundColor='#e9e8e3' primary={false} style={style2} label="View Organizations" labelStyle={style1.labelStyle} onClick={() => props.history.push('/organizations')} />
-                <RaisedButton backgroundColor='#e9e8e3' primary={false} style={style3} label="Back to Home Page" labelStyle={style1.labelStyle} onClick={() => props.history.push('/')} />
+                <RaisedButton backgroundColor='#e9e8e3' primary={false} style={style1} label="Login" labelStyle={style1.labelStyle} onClick={() => props.history.push('/login')} />
+                <RaisedButton backgroundColor='#e9e8e3' primary={false} style={style2} label="Organizations" labelStyle={style1.labelStyle} onClick={() => props.history.push('/organizations')} />
+                <RaisedButton backgroundColor='#e9e8e3' primary={false} style={style3} label="Home" labelStyle={style1.labelStyle} onClick={() => props.history.push('/')} />
               </div>
             );
           } else if (route === '/organizations') {
             return (
               <div>
-                <RaisedButton backgroundColor='#e9e8e3' primary={false} style={style1} label="Login as an admin" labelStyle={style1.labelStyle} onClick={() => props.history.push('/login')} />
-                <RaisedButton backgroundColor='#e9e8e3' primary={false} style={style2} label="Add your organization" labelStyle={style1.labelStyle} onClick={() => props.history.push('/add')} />
-                <RaisedButton backgroundColor='#e9e8e3' primary={false} style={style3} label="Back to Home Page" labelStyle={style1.labelStyle} onClick={() => props.history.push('/')} />
+                <RaisedButton backgroundColor='#e9e8e3' primary={false} style={style1} label="Login" labelStyle={style1.labelStyle} onClick={() => props.history.push('/login')} />
+                <RaisedButton backgroundColor='#e9e8e3' primary={false} style={style2} label="Add ORG" labelStyle={style1.labelStyle} onClick={() => props.history.push('/add')} />
+                <RaisedButton backgroundColor='#e9e8e3' primary={false} style={style3} label="Home" labelStyle={style1.labelStyle} onClick={() => props.history.push('/')} />
               </div>
             );
           }

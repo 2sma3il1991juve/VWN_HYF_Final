@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-import Avatar from 'material-ui/Avatar';
-import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import Route from 'react-router-dom/Route';
 import '../CSS/LandingPage.css';
-
-
-
-// const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 class LandingPage extends Component {
   constructor(props) {
@@ -31,14 +25,12 @@ class LandingPage extends Component {
       backgroundColor: '#e9e8e3',
     };
     const { data } = this.state
-    let imagesArray = []
     return (
       <div className='LandingPageContainer'>
         <Route className='route' exact path='/' component={(props) => {
           return (
             <div className="orgContainer">
               {Object.keys(data).map((org) => {
-                imagesArray[org] = Object.assign({}, data[org]['logo'])
                 return (
                   <div key={org} className="org orgItem">
 

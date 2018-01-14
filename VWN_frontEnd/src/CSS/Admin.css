@@ -1,5 +1,4 @@
 body{
-    
 }
 /* .adminPage{
     width: 100%
@@ -8,13 +7,21 @@ body{
     width: 100%
 } */
 .badge{
-    width: 95%
+    width: 95%;
+    position: absolute !important
 }
 .tabs{
-  background-color: white;
+ 
   /* width: 80%; */
   margin: auto;
   text-align: center;
+}
+
+.tabs__header {
+    background-color: rgb(72,72,72) !important;
+}
+h2{
+    text-align: center
 }
 .orgContainer{
     display: grid;
@@ -28,6 +35,5 @@ body{
     grid-column: auto;
     z-index: 100;
     max-height: 2.5rem;
-    background-color: white !important;
-    color: #ed2f25 !important;
+    background-color: #e8e7e2 !important;
 }
