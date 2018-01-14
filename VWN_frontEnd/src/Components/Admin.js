@@ -96,14 +96,6 @@ class Admin extends Component {
       </div>
     )
   }
-  // handleRequestDelete = (e) => {
-  //   console.log(e.target.value)
-
-  //   this.setState({
-  //     open: true,
-  //     selectedOrgId: e.target.key
-  //   });
-  // }
 
   handleDeletOrg = (event) => {
     this.sendRequest('delete', 'remove').then(() => {
@@ -111,10 +103,14 @@ class Admin extends Component {
     }).then(()=>{
       this.setState({ open: false })
     window.location.reload()
-    })
-    
+    }) 
     // this.forceUpdate()
     // alert("deleted")
+  }
+
+
+  handleConfirmOrg = () => {   
+    this.sendRequest('put', 'approve')
   }
 
   handleDialogClose = () => {
@@ -147,6 +143,7 @@ class Admin extends Component {
       }));
     })
   }
+
 
   sendRequest = (method, path) => {
     return new Promise((res, rej) => {
@@ -240,17 +237,17 @@ class Admin extends Component {
             value={this.state.value}
             onChange={this.handleChange}
           >
-            <Tab label="Active Organizations" value="a">
+            <Tab label="Active Organizations" className="tabs__header" value="a">
               <div>
                 <h2 style={styles.headline}>Active Organizations:</h2>
                 {this.renderOrgs(orgs)}
               </div>
             </Tab>
-            <Tab label="Requests" value="b" icon={<Badge
+            <Tab label="Requests"  className="tabs__header" value="b" icon={<Badge
               className="badge"
               badgeContent={Object.keys(newOrgs).length}
               secondary={true}
-              badgeStyle={{ top: 1, right: 1 }}
+              badgeStyle={{ top: 1, right: 1, backgroundColor:"#ed2f25" }}
             >
             </Badge>}>
               {this.renderOrgs(newOrgs)}
@@ -268,7 +265,7 @@ class Admin extends Component {
           Are you sure you want to delete this organization ?
         </Dialog>
         <Dialog
-          title="Dialog With Actions"
+          title="Confirm"
           actions={actions2}
           modal={false}
           open={this.state.open1}
