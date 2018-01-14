@@ -181,6 +181,7 @@ class Admin extends Component {
 
 
   renderOrgs = (orgs) => {
+
     return (
       <div className="orgContainer">
         {Object.keys(orgs).map(org => {
@@ -209,6 +210,15 @@ class Admin extends Component {
   }
 
   render() {
+    const style = {
+      // position: 'fixed',
+      // right: '20vw',
+      // width: '10vw',
+      background: '#e9e8e3',
+      labelStyle: {
+        fontSize: '1em'
+      }
+    }
     let { newOrgs, orgs } = this.state
     const actions1 = [
       <FlatButton
@@ -241,6 +251,13 @@ class Admin extends Component {
       return <ErrorPage status={this.state.status} />;
     } else return (
       <div className="adminPage">
+              <FlatButton
+          label="Log out"
+          backgroundColor='#e9e8e3' 
+          primary={false}
+          style = {style}
+          onClick={() => { console.log(this); localStorage.clear(); window.location.reload() }}
+        />
         <SwipeableViews
           className="tabsContainer"
           index={this.state.slideIndex}
@@ -287,11 +304,6 @@ class Admin extends Component {
         >
           {this.showOrgDetails()}
         </Dialog>
-        <FlatButton
-          label="Log out"
-          primary={true}
-          onClick={() => { console.log(this); localStorage.clear(); window.location.reload() }}
-        />
       </div>
     );
   }
