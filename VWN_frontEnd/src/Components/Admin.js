@@ -32,7 +32,8 @@ class Admin extends Component {
     super(props);
     this.myToken = this.props.response.myToken
     this.state = {
-      selectedOrgId: false,
+      selectedOrgId: '',
+      selectedNewOrg: {},
       status: 0,
       value: 'a',
       newOrgs: {},
@@ -48,6 +49,7 @@ class Admin extends Component {
   }
 
   componentWillMount() {
+    console.log(this.state.username, this.state.password)
     console.log(this.props.orgs)
     let localStatus = reactLocalStorage.getObject('status')
     let localResponse = reactLocalStorage.getObject('response')
@@ -79,7 +81,8 @@ class Admin extends Component {
     if (newOrgs.newOrgs[org]) {
       this.setState({
         open1: true,
-        selectedOrgId: newOrgs.newOrgs[org]
+        selectedOrgId: org,
+        selectedNewOrg: newOrgs.newOrgs[org]
       })
     }
     else {
@@ -88,11 +91,11 @@ class Admin extends Component {
   }
 
   showOrgDetails = () => {
-    let { selectedOrgId } = this.state
+    let { selectedNewOrg } = this.state
     return (
       <div>
-        <p>Name: {selectedOrgId["name"]}</p>
-        <p>Description: {selectedOrgId["description"]}</p>
+        <p>Name: {selectedNewOrg["name"]}</p>
+        <p>Description: {selectedNewOrg["description"]}</p>
       </div>
     )
   }
@@ -100,17 +103,23 @@ class Admin extends Component {
   handleDeletOrg = (event) => {
     this.sendRequest('delete', 'remove').then(() => {
       this.refreshNewOrgs()
-    }).then(()=>{
+    }).then(() => {
       this.setState({ open: false })
+
     window.location.reload()
     }) 
     // this.forceUpdate()
     // alert("deleted")
   }
 
+  handleConfirmOrg = ()=> {
+    this.sendRequest('put', 'approve').then(() => {
+      this.refreshNewOrgs()
+    }).then(() => {
+      this.setState({ open: false })
+      window.location.reload()
+    })
 
-  handleConfirmOrg = () => {   
-    this.sendRequest('put', 'approve')
   }
 
   handleDialogClose = () => {
@@ -146,6 +155,7 @@ class Admin extends Component {
 
 
   sendRequest = (method, path) => {
+    console.log(this.state.selectedOrgId)
     return new Promise((res, rej) => {
       const xhr = new XMLHttpRequest();
       xhr.open(method, `${this.props.serverLink}${path}`, true);
@@ -154,7 +164,9 @@ class Admin extends Component {
       xhr.onreadystatechange = () => {
         if (xhr.readyState === 4) {
           if (xhr.status === 200) {
-            console.log("deleted")
+            this.setState(Object.assign({}, this.state, {
+              status: xhr.status,
+            }));
             res()
           }
           this.setState(Object.assign({}, this.state, {
@@ -173,8 +185,10 @@ class Admin extends Component {
       <div className="orgContainer">
         {Object.keys(orgs).map(org => {
           let orgObject = orgs[org]
+          
           return (
             <Chip
+            key={org}
               value={org}
               onRequestDelete={(e) => {
                 this.setState({ selectedOrgId: org, open: true })
