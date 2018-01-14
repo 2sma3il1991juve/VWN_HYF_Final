@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
 import Observable from '../Observable';
-import Drawer from 'material-ui/Drawer';
-import FlatButton from 'material-ui/FlatButton/FlatButton';
-import AppBar from 'material-ui/AppBar';
 import TagsCheckBoxes from './TagsCheckBoxes';
 import '../CSS/Tags.css';
-
 class Tags extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      tags: {},
       activeTags: {},
       open: false
     }
@@ -34,25 +29,7 @@ class Tags extends Component {
   render() {
     const { open } = this.state
     return (
-      <div className="tags">
-        <FlatButton
-          label="Categories"
-          onClick={() => this.setState({ open: !open })}
-        />
-        <Drawer
-          docked={false}
-          width={200}
-          openSecondary={true}
-          open={open}
-          onRequestChange={(open) => this.setState({ open })}
-        >
-          <AppBar title="Categories:"
-            showMenuIconButton={false}
-            titleStyle={{ color: "#ed2f25" }}
-            className="DTitle" />
-          <TagsCheckBoxes tags={this.props.tags} activeTags={this.state.activeTags} handle={this.handleCheckbox} />
-        </ Drawer>
-      </div>
+      <TagsCheckBoxes tags={this.props.tags} activeTags={this.state.activeTags} handle={this.handleCheckbox} />
     )
   }
 }

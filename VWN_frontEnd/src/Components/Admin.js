@@ -8,8 +8,8 @@ import Avatar from 'material-ui/Avatar';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import ErrorPage from '../Components/ErrorPage';
+import { reactLocalStorage } from 'reactjs-localstorage';
 import '../CSS/Admin.css';
-
 
 const styles = {
   headline: {
@@ -30,93 +30,165 @@ class Admin extends Component {
   };
   constructor(props) {
     super(props);
-    this.newOrgs = this.props.response.orgs
-    this.componentDidCatchtags = this.props.response.tags
     this.myToken = this.props.response.myToken
     this.state = {
       selectedOrgId: false,
-      canClick: true,
       status: 0,
-      deleteIsClicked: false,
       value: 'a',
       newOrgs: {},
       orgs: {},
       newTags: {},
       open: false,
+      open1: false,
+      username: '',
+      password: '',
+      response: {}
     };
+
   }
 
   componentWillMount() {
     console.log(this.props.orgs)
+    let localStatus = reactLocalStorage.getObject('status')
+    let localResponse = reactLocalStorage.getObject('response')
+    let username = reactLocalStorage.getObject('username')
+    let password = reactLocalStorage.getObject('password')
+    console.log(localResponse)
     this.setState({
       orgs: this.props.orgs,
-      newOrgs: this.props.response.orgs,
-      newTags: this.props.response.tags
+      newOrgs: localResponse.orgs,
+      newTags: localResponse.tags,
+      username,
+      password
     })
   }
 
   handleChange = (value) => {
     this.setState({
       value: value,
-      open: false
+      open: false,
+      open1: false
     });
   };
 
-  handleClick = () => {
-    alert("to show more info please go to the orgs main page");
+  handleClick = (org) => {
+    let newOrgs = this.state
+    console.log(newOrgs.newOrgs[org])
+    // console.log()
+    // if(orgs[org])
+    if (newOrgs.newOrgs[org]) {
+      this.setState({
+        open1: true,
+        selectedOrgId: newOrgs.newOrgs[org]
+      })
+    }
+    else {
+      alert("to show more info please go to the orgs main page");
+    }
   }
 
-  handleRequestDelete = (key) => {
-    console.log(key)
-
-    this.setState({
-      open: true,
-      selectedOrgId: key
-    });
+  showOrgDetails = () => {
+    let { selectedOrgId } = this.state
+    return (
+      <div>
+        <p>Name: {selectedOrgId["name"]}</p>
+        <p>Description: {selectedOrgId["description"]}</p>
+      </div>
+    )
   }
+  // handleRequestDelete = (e) => {
+  //   console.log(e.target.value)
+
+  //   this.setState({
+  //     open: true,
+  //     selectedOrgId: e.target.key
+  //   });
+  // }
 
   handleDeletOrg = (event) => {
-    this.sendRequest('delete', 'remove')
+    this.sendRequest('delete', 'remove').then(() => {
+      this.refreshNewOrgs()
+    }).then(()=>{
+      this.setState({ open: false })
+    window.location.reload()
+    })
+    
+    // this.forceUpdate()
+    // alert("deleted")
   }
 
   handleDialogClose = () => {
-    this.setState({ open: false });
+    this.setState({ open: false, open1: false });
   };
 
-  sendRequest = (method, path) => {
-    this.setState(Object.assign({}, this.state, { canClick: false }));
-    const xhr = new XMLHttpRequest();
-    xhr.open(method, `${this.props.serverLink}${path}`, true);
-    xhr.setRequestHeader('Authorization', `Bearer ${this.myToken}`);
-    xhr.setRequestHeader("Content-type", "application/json");
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-          console.log("deleted")
+  refreshNewOrgs() {
+    return new Promise((res, rej) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('Post', `${this.serverLink}login`, true);
+      xhr.setRequestHeader("Content-type", "application/json");
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+          // console.log('readyState')
+          if (xhr.status === 200) {
+            let response = JSON.parse(xhr.response)
+            reactLocalStorage.setObject('response', response)
+            reactLocalStorage.setObject('status', xhr.status)
+            this.setState({ response: JSON.parse(xhr.response) })
+            Object.assign({}, this.state.newOrgs, response.orgs)
+            res()
+          }
+          this.setState(Object.assign({}, this.state, { status: xhr.status }));
         }
-        this.setState(Object.assign({}, this.state, {
-          status: xhr.status,
-        }));
-      }
-    };
-    xhr.send(JSON.stringify({ orgId: this.state.selectedOrgId }));
+      };
+      xhr.send(JSON.stringify({
+        username: this.state.username,
+        password: this.state.password,
+        status: xhr.status
+      }));
+    })
   }
+
+  sendRequest = (method, path) => {
+    return new Promise((res, rej) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open(method, `${this.props.serverLink}${path}`, true);
+      xhr.setRequestHeader('Authorization', `Bearer ${this.myToken}`);
+      xhr.setRequestHeader("Content-type", "application/json");
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            console.log("deleted")
+            res()
+          }
+          this.setState(Object.assign({}, this.state, {
+            status: xhr.status,
+          }));
+
+        }
+      };
+      xhr.send(JSON.stringify({ orgId: this.state.selectedOrgId }));
+    })
+  }
+
 
   renderOrgs = (orgs) => {
     return (
       <div className="orgContainer">
         {Object.keys(orgs).map(org => {
+          let orgObject = orgs[org]
           return (
-              <Chip
-              key={org}
-                onRequestDelete={this.handleRequestDelete}
-                onClick={this.handleClick}
-                style={styles.chip}
-                className="orgChip"
-              >
-                <Avatar src={orgs[org]["logo"]} />
-                {orgs[org]["name"]}
-              </Chip>
+            <Chip
+              value={org}
+              onRequestDelete={(e) => {
+                this.setState({ selectedOrgId: org, open: true })
+              }}
+              onClick={(e, value) => this.handleClick(org)}
+              style={styles.chip}
+              className="orgChip"
+            >
+              <Avatar src={orgs[org]["logo"]} />
+              {orgs[org]["name"]}
+            </Chip>
           );
         }
         )
@@ -127,7 +199,7 @@ class Admin extends Component {
 
   render() {
     let { newOrgs, orgs } = this.state
-    const actions = [
+    const actions1 = [
       <FlatButton
         label="Cancel"
         primary={true}
@@ -141,6 +213,19 @@ class Admin extends Component {
       />,
     ];
 
+    const actions2 = [
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        onClick={this.handleDialogClose}
+      />,
+      <FlatButton
+        label="Confirm"
+        primary={true}
+        keyboardFocused={true}
+        onClick={this.handleConfirmOrg}
+      />,
+    ]
     if (this.state.status === 401 || this.state.status === 404 || this.state.status === 500) {
       return <ErrorPage status={this.state.status} />;
     } else return (
@@ -175,13 +260,27 @@ class Admin extends Component {
         </SwipeableViews>
         <Dialog
           title="Dialog With Actions"
-          actions={actions}
+          actions={actions1}
           modal={false}
           open={this.state.open}
-          onRequestClose={this.handleClose}
+        // onRequestClose={this.handleClose}
         >
           Are you sure you want to delete this organization ?
         </Dialog>
+        <Dialog
+          title="Dialog With Actions"
+          actions={actions2}
+          modal={false}
+          open={this.state.open1}
+        // onRequestClose={this.handleClose}
+        >
+          {this.showOrgDetails()}
+        </Dialog>
+        <FlatButton
+          label="Log out"
+          primary={true}
+          onClick={() => { console.log(this); localStorage.clear(); window.location.reload() }}
+        />
       </div>
     );
   }
