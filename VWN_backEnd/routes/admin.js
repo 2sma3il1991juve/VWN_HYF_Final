@@ -58,6 +58,7 @@ router.delete('/remove', (req, res) => {
     });
 })
 router.put('/approve', (req, res) => {
+  console.log(req.body.orgId)
   queryPromise(`
         UPDATE
             org
