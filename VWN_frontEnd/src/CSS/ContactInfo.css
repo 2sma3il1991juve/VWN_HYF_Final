@@ -1,28 +1,25 @@
-.contactTitle {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: lighter;
-    font-style: normal;
-    color: #ed2116 !important;
-    font-size: 1rem;
+@media only screen and (min-width: 768px) {
+    .contactTitle {
+        font-family: 'Open Sans', sans-serif;
+        font-weight: lighter;
+        font-style: normal;
+        color: #ed2116 !important;
+        font-size: 1rem;
+    }
+    .contactInfo {
+        font-family: 'Open Sans', sans-serif;
+        font-weight: lighter;
+        font-style: normal;
+        color: #222222 !important;
+        font-size: 0.9rem
+    }
+    .popUp {
+        background-color: #e9e8e3 !important
+    }
+    .dialogTitle {
+        color: #ed2f25 !important;
+    }
+    .popUpBtn {
+        color: #ed2f25 !important;
+    }
 }
-
-.contactInfo {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: lighter;
-    font-style: normal;
-    color: #222222 !important;
-    font-size: 0.9rem
-}
-
-.popUp {
-    background-color: #e9e8e3 !important
-}
-
-.dialogTitle {
-    color: #ed2f25 !important;
-}
-
-.popUpBtn {
-    color: #ed2f25 !important;
-}
-

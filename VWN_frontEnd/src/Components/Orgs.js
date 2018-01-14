@@ -87,6 +87,7 @@ class Orgs extends Component {
     return (
       <div className="orgs">
         {Object.keys(orgs).map(org => {
+          console.log(orgs[org])
           return (
             <div className="cardDIV" key={org}>
               <Card

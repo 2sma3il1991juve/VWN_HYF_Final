@@ -1,11 +1,23 @@
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
     font-family: 'SolexRegular';
-    list-style-type: none;
-    font-size: 100%;
-    font-weight: bolder;
+    font-weight: lighter;
     font-style: normal;
+    margin: 0;
+    padding: 0;
 }
 
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+.app-container {
+    margin-top: 8vw;
+}
+
+@media only screen and (min-width: 768px) {
+    .main-wrapper {}
+    .route {}
+    .app-container {
+        margin-top: 10vw;
+    }
+}
