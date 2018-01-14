@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import Observable from '../Observable'
 import MenuItem from 'material-ui/MenuItem';
-
-class Tags extends Component {
+import '../CSS/Tags.css';
+class TagsCheckBoxes extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -14,30 +14,31 @@ class Tags extends Component {
   componentWillMount() {
     this.setState({
       tags: this.props.tags,
-      activeTags: {}
+      activeTags: this.props.activeTags
     })
   }
 
-  componentWillUnmount() {
-    this.setState({
-      activeTags: Observable.getHash('t')
-    })
-  }
+  render() {
+    const style = {
+      margin: 0,
+      textAlign: 'center',
+      backgroundColor: '#e9e8e3',
+      fontFamily: 'Open Sans'
 
-  renderTags(tags) {
+    };
+    const {tags,activeTags} = this.state
     return (
       <div className='tags'>
         {Object.keys(tags).map(tag => {
           return (
             <MenuItem key={tag}>
-              <label>
+              <label >
                 <input
-                  defaultChecked={this.props.activeTags[tag] ? true : false}
+                  defaultChecked={activeTags[tag] ? true : false}
                   type='checkbox'
                   value={tag}
-                  // checked={this.props.activeTags[tag] ? true : false}
-                  onChange={this.props.handle
-                  }
+                  onChange={this.props.handle}
+                  style={style}
                 />
                 {tags[tag]}
               </label>
@@ -47,14 +48,6 @@ class Tags extends Component {
       </div>
     )
   }
-
-  render() {
-    return (
-      <div>
-        {this.renderTags(this.state.tags)}
-      </div>
-    )
-  }
 }
 
-export default Tags
+export default TagsCheckBoxes

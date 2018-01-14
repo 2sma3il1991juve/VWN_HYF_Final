@@ -1,3 +1,7 @@
-.login{
-  margin: auto !important;
+@media only screen and (min-width: 768px) {
+  .login {
+    background: #e9e8e3 !important;
+    margin-top: 200px !important;
+    margin: auto !important;
+  }
 }

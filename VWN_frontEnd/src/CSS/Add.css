@@ -1,0 +1,18 @@
+.addPageContainer {
+
+}
+.AddTagContainer {
+ display: inherit;
+ flex-wrap: wrap;
+}
+
+.AddMapContainer {
+  display: inherit;
+  width: 150vw;
+  flex-wrap: wrap;
+}
+
+.TagMapContainer{
+  display: flex;
+  width: 200%;
+}

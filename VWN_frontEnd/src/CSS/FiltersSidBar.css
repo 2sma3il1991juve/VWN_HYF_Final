@@ -1,0 +1,40 @@
+@media only screen and (min-width: 768px) {
+  .FiltersSidBarContainer {
+    position: fixed;
+    top: 13vw;
+    bottom: 10vw;
+    right: 0;
+    width: 30vw;
+    background: #e9e8e3;
+    height: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+  .Filters {}
+  .RegionMap {
+    margin-top: 3%;
+    margin-bottom: 3%;
+    width: 100%;
+    max-width: 100vw;
+  }
+  .RegionSerch {}
+  #headerButtonsRight {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+  }
+  #headerButtonsRight-child {
+    -webkit-box-flex: 1 1 auto !important;
+    -moz-box-flex: 1 1 auto !important;
+    -webkit-flex: 1 1 auto !important;
+    -ms-flex: 1 1 auto !important;
+    flex: 1 1 auto !important;
+    margin-right: 5px !important;
+  }
+  .FilterTabName {
+    text-align: center;
+    width: 100%;
+  }
+}

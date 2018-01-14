@@ -1,0 +1,68 @@
+.AppBar {
+  position: fixed;
+  background: #e9e8e3;
+  height: 8vw !important;
+  width: 100%;
+  border-bottom: 0.5vw solid #ed2f25;
+}
+.VWNLogo {
+  max-height: 4vw !important;
+  margin-left: 4vw !important;
+}
+@media only screen and (min-width: 768px) {
+  .AppBar {
+    height: 10vw !important;
+  }
+  .VWNLogo {
+    max-height: 90% !important;
+    margin-left: 8vw !important;
+  }
+  .ButtonsContainer {
+    /* position: fixed;
+  flex-direction: row-reverse !important;  */
+  }
+  /* 
+.menuBar {
+  display: flex;  
+  position: fixed;
+  width: 100%;
+  font-family: 'SolexRegular';
+  font-weight: bolder;
+  margin: 0;
+  padding: 0;
+  border-width: 0;
+  border-style: solid;
+  background-color: #e8e7e2;
+  border-bottom-width: 5px;
+  border-bottom-color: #ed2116;
+}
+.menuUL {
+  display: inherit;
+  list-style-type: none;  
+  margin-top: 30px;  
+}
+.menuBarItem {  
+  margin-right: 5px;
+  color: #ed2116;
+  width: 30px;
+  height: 10px;
+  padding: 5px 5px 15px 10px;   
+}
+.menuBarItem:visited:not(.activeMenuBarItem) {
+  text-decoration: none;
+}
+
+.menuBarItem:hover:not(.activeMenuBarItem) { 
+  padding: 5px 5px 15px 10px; 
+  background-color: #ed2116;
+  color: white;
+}   
+.activeMenuBarItem {
+  padding: 5px 5px 15px 10px;
+  background-color: #ed2116;
+  color: white;
+}
+#logo {
+  height: 70px;
+} */
+}
